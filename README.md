@@ -507,3 +507,33 @@
     Press any key to continue . . .
 
 </details>
+
+<details>
+    <summary>编译结果</summary>
+
+    # tree 6.3.15/py
+    6.3.15/py
+    ├── py310
+    │   ├── _thostmduserapi.pyd
+    │   └── _thosttraderapi.pyd
+    ├── py311
+    │   ├── _thostmduserapi.pyd
+    │   └── _thosttraderapi.pyd
+    ├── py312
+    │   ├── _thostmduserapi.pyd
+    │   └── _thosttraderapi.pyd
+    ├── py313
+    │   ├── _thostmduserapi.pyd
+    │   └── _thosttraderapi.pyd
+    ├── py37
+    │   ├── _thostmduserapi.pyd
+    │   └── _thosttraderapi.pyd
+    ├── py38
+    │   ├── _thostmduserapi.pyd
+    │   └── _thosttraderapi.pyd
+    ├── py39
+    │   ├── _thostmduserapi.pyd
+    │   └── _thosttraderapi.pyd
+    ├── thostmduserapi.py
+    └── thosttraderapi.py
+</details>
