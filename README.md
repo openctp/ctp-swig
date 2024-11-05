@@ -1,6 +1,12 @@
 # ctp-swig
 
-## 环境准备
+Swig 转换 CTPAPI 到 Python 全攻略
+
+## 快速使用
+
+#TODO pip安装 及 手动从openctp官网获取dll
+
+## 依赖环境
 
 ### Windows
 
@@ -11,12 +17,10 @@
 ### Linux
 
 - Debian 12
+- 3.25.1
+- g++ 12.2.0
 
-## Swig 转换说明
-
-### Linux
-
-### Windows
+## Swig 转换
 
 <details>
     <summary>Windows 编译示例</summary>
@@ -509,7 +513,63 @@
 </details>
 
 <details>
-    <summary>编译结果</summary>
+    <summary>Linux编译示例</summary>
+
+    root@Jedore-win:~/ctp-swig/6.7.7# ./auto_compile.sh
+    rm: cannot remove '*_wrap.*': No such file or directory
+    ################## Swig generate cpp/py files ##################
+    lin64/ThostFtdcTraderApi.h:30: Warning 514: Director base class CThostFtdcTraderSpi has no virtual destructor.
+    lin64/ThostFtdcMdApi.h:30: Warning 514: Director base class CThostFtdcMdSpi has no virtual destructor.
+    ########################## Compile ##########################
+    mkdir: cannot create directory ‘py’: File exists
+    CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+      Compatibility with CMake < 2.8.12 will be removed from a future version of
+      CMake.
+
+      Update the VERSION argument <min> value or use a ...<max> suffix to tell
+      CMake that the project does not need compatibility with older versions.
+
+
+    -- The C compiler identification is GNU 12.2.0
+    -- The CXX compiler identification is GNU 12.2.0
+    -- Detecting C compiler ABI info
+    -- Detecting C compiler ABI info - done
+    -- Check for working C compiler: /usr/bin/cc - skipped
+    -- Detecting C compile features
+    -- Detecting C compile features - done
+    -- Detecting CXX compiler ABI info
+    -- Detecting CXX compiler ABI info - done
+    -- Check for working CXX compiler: /usr/bin/c++ - skipped
+    -- Detecting CXX compile features
+    -- Detecting CXX compile features - done
+    -- Configuring done
+    -- Generating done
+    -- Build files have been written to: /root/ctp-swig/6.7.7/build
+    [ 25%] Building CXX object CMakeFiles/_thosttraderapi.dir/thosttraderapi_wrap.cxx.o
+    [ 50%] Linking CXX shared library _thosttraderapi.so
+    [ 50%] Built target _thosttraderapi
+    [ 75%] Building CXX object CMakeFiles/_thostmduserapi.dir/thostmduserapi_wrap.cxx.o
+    [100%] Linking CXX shared library _thostmduserapi.so
+    [100%] Built target _thostmduserapi 
+
+</details>
+
+
+<details>
+    <summary>Linux编译结果</summary>
+
+    # tree 6.7.7/py
+    6.7.7/py
+    ├── thostmduserapi.py
+    ├── _thostmduserapi.so
+    ├── thosttraderapi.py
+    └── _thosttraderapi.so 
+
+</details>
+
+
+<details>
+    <summary>Windows编译结果</summary>
 
     # tree 6.3.15/py
     6.3.15/py
@@ -536,4 +596,7 @@
     │   └── _thosttraderapi.pyd
     ├── thostmduserapi.py
     └── thosttraderapi.py
+
 </details>
+
+## 如何使用
