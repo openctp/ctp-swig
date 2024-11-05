@@ -54,23 +54,26 @@ def test_mdapi():
             try:
                 Q_CONNECT.get(timeout=TIMEOUT)
             except:
+                print('Test Failed: mdapi')
                 assert False, 'Connect Failed!'
 
             try:
                 if not Q_LOGIN.get(timeout=TIMEOUT):
+                    print('Test Failed: mdapi')
                     assert False, 'Login Failed!'
 
             except:
+                print('Test Failed: mdapi')
                 assert False, 'Login Failed!'
 
             # success
-            print('Test Succeed!')
+            print('Test Succeed: mdapi')
             break
         except AssertionError as e:
             error = str(e)
     else:
         # Failed
-        print('Test Failed!')
+        print('Test Failed: mdapi')
         assert False, error
 
 

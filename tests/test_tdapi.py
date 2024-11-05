@@ -61,18 +61,28 @@ def test_tdapi():
             try:
                 Q_CONNECT.get(timeout=TIMEOUT)
             except:
+                print("Test Failed: tdapi")
                 assert False, 'Connect Failed!'
 
             try:
                 if not Q_AUTH.get(timeout=TIMEOUT):
+                    print("Test Failed: tdapi")
                     assert False, 'Auth Failed!'
 
             except:
+                print("Test Failed: tdapi")
                 assert False, 'Auth Failed!'
 
             # success
+            print("Test Succeed: tdapi")
             break
         except AssertionError as e:
+            print("Test Failed: tdapi")
             error = str(e)
     else:
+        print("Test Failed: tdapi")
         assert False, error
+
+
+if __name__ == '__main__':
+    test_tdapi()

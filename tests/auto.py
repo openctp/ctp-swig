@@ -8,8 +8,7 @@ import shutil
 import platform
 import sys
 
-ctp_version = ['6.3.15']
-pys = ['37', '38', '39', '310', '311', '312', '313']
+ctp_version = ['6.7.7']
 
 
 def delete():
@@ -20,6 +19,7 @@ def delete():
         'test_mdapi.py',
         'test_tdapi.py',
         'win-auto.bat',
+        'linux-auto.sh',
     ]
     for file in os.listdir('.'):
         if file not in files:
@@ -32,23 +32,39 @@ def delete():
 def test():
     delete()
 
-    for ctp in ctp_version:
-        # copy new files & test
-        src = os.path.join('..', ctp, 'win64')
-        shutil.copy(os.path.join(src, 'thostmduserapi_se.dll'), '.')
-        shutil.copy(os.path.join(src, 'thosttraderapi_se.dll'), '.')
+    if platform.system().startswith('Windows'):
+        for ctp in ctp_version:
+            # copy new files & test
+            src = os.path.join('..', ctp, 'win64')
+            shutil.copy(os.path.join(src, 'thostmduserapi_se.dll'), '.')
+            shutil.copy(os.path.join(src, 'thosttraderapi_se.dll'), '.')
 
+            src = os.path.join('..', ctp, 'py')
+            shutil.copy(os.path.join(src, 'thostmduserapi.py'), '.')
+            shutil.copy(os.path.join(src, 'thosttraderapi.py'), '.')
+            py_version = f'py{sys.version_info.major}{sys.version_info.minor}'
+            src = os.path.join('..', ctp, 'py', py_version)
+            shutil.copy(os.path.join(src, '_thostmduserapi.pyd'), '.')
+            shutil.copy(os.path.join(src, '_thosttraderapi.pyd'), '.')
 
-        src = os.path.join('..', ctp, 'py')
-        shutil.copy(os.path.join(src, 'thostmduserapi.py'), '.')
-        shutil.copy(os.path.join(src, 'thosttraderapi.py'), '.')
-        py_version = f'py{sys.version_info.major}{sys.version_info.minor}'
-        src = os.path.join('..', ctp, 'py', py_version)
-        shutil.copy(os.path.join(src, '_thostmduserapi.pyd'), '.')
-        shutil.copy(os.path.join(src, '_thosttraderapi.pyd'), '.')
+            os.system('python test_mdapi.py')
+            os.system('python test_tdapi.py')
 
-        os.system('python test_mdapi.py')
-        os.system('python test_tdapi.py')
+    elif platform.system().startswith('Linux'):
+        for ctp in ctp_version:
+            # copy new files & test
+            src = os.path.join('..', ctp, 'lin64')
+            shutil.copy(os.path.join(src, 'thostmduserapi_se.so'), '.')
+            shutil.copy(os.path.join(src, 'thosttraderapi_se.so'), '.')
+
+            src = os.path.join('..', ctp, 'py')
+            shutil.copy(os.path.join(src, 'thostmduserapi.py'), '.')
+            shutil.copy(os.path.join(src, 'thosttraderapi.py'), '.')
+            shutil.copy(os.path.join(src, '_thostmduserapi.so'), '.')
+            shutil.copy(os.path.join(src, '_thosttraderapi.so'), '.')
+
+            os.system('python test_mdapi.py')
+            os.system('python test_tdapi.py')  
 
     delete()
 
