@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+﻿cmake_minimum_required(VERSION 2.8)
 
 project(ctpapi-python)
 
@@ -23,7 +23,6 @@ elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
         /root/.pyenv/versions/3.12.0/include/python3.12/
         )
     link_directories(${PROJECT_SOURCE_DIR}
-        
         /root/.pyenv/versions/3.12.0/lib/
         )
 endif()
@@ -44,7 +43,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     set_target_properties(${trader} PROPERTIES PREFIX "")
     target_link_libraries(${trader} PUBLIC pthread LIB_TD python3.12)
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-    target_link_libraries(${trader} PUBLIC "lin64/thosttraderapi_se.so" python3.12)
+    target_link_libraries(${trader} PUBLIC thosttraderapi_se python${PY_LIB})
 endif()
 
 add_library(${mduser} SHARED thostmduserapi_wrap.cxx)
@@ -60,5 +59,5 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     set_target_properties(${mduser} PROPERTIES PREFIX "")
     target_link_libraries(${mduser} PUBLIC pthread LIB_MD python3.12)
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-    target_link_libraries(${mduser} PUBLIC thostmduserapi_se python3.12)
+    target_link_libraries(${mduser} PUBLIC thostmduserapi_se python${PY_LIB})
 endif()
