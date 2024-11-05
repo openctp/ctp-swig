@@ -47,9 +47,6 @@ def test():
             shutil.copy(os.path.join(src, '_thostmduserapi.pyd'), '.')
             shutil.copy(os.path.join(src, '_thosttraderapi.pyd'), '.')
 
-            os.system('python test_mdapi.py')
-            os.system('python test_tdapi.py')
-
     elif platform.system().startswith('Linux'):
         for ctp in ctp_version:
             # copy new files & test
@@ -63,8 +60,8 @@ def test():
             shutil.copy(os.path.join(src, '_thostmduserapi.so'), '.')
             shutil.copy(os.path.join(src, '_thosttraderapi.so'), '.')
 
-            os.system('python test_mdapi.py')
-            os.system('python test_tdapi.py')  
+    os.system('python test_mdapi.py')
+    os.system('python test_tdapi.py')
 
     delete()
 
