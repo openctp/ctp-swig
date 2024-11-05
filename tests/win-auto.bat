@@ -5,6 +5,3 @@ for %%i in (%pys%) do (
     pyenv local %%i
     python auto.py
 )
-
-pause
-

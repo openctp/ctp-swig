@@ -19,8 +19,7 @@ for %%i in (%pys%) do (
         copy build\Release\_thosttraderapi.dll py\py%%a\_thosttraderapi.pyd
         copy build\Release\_thostmduserapi.dll py\py%%a\_thostmduserapi.pyd
         rmdir /s /q build
-        del *_wrap.*
     )
 )
 
-pause
+del *_wrap.*
