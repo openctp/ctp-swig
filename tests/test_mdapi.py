@@ -54,16 +54,13 @@ def test_mdapi():
             try:
                 Q_CONNECT.get(timeout=TIMEOUT)
             except:
-                print('Test Failed: mdapi')
                 assert False, 'Connect Failed!'
 
             try:
                 if not Q_LOGIN.get(timeout=TIMEOUT):
-                    print('Test Failed: mdapi')
                     assert False, 'Login Failed!'
 
             except:
-                print('Test Failed: mdapi')
                 assert False, 'Login Failed!'
 
             # success

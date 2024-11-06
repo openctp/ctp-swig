@@ -15,11 +15,11 @@ def delete():
     # delete old files
     files = [
         '__init__.py',
-        'auto.py',
+        'test.py',
         'test_mdapi.py',
         'test_tdapi.py',
-        'win-auto.bat',
-        'linux-auto.sh',
+        'test-win.bat',
+        'test-linux.sh',
     ]
     for file in os.listdir('.'):
         if file not in files:
@@ -60,6 +60,7 @@ def test():
             shutil.copy(os.path.join(src, '_thostmduserapi.so'), '.')
             shutil.copy(os.path.join(src, '_thosttraderapi.so'), '.')
 
+    os.system('python -V')
     os.system('python test_mdapi.py')
     os.system('python test_tdapi.py')
 
