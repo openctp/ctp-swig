@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -eq 0 ]; then
-  echo "Usage: $0 <ctpapi version 1: 6.3.19> <ctpapi version 2: 6.6.7> ..."
+  echo "Usage: ./$0 <ctpapi version 1: 6.3.19> <ctpapi version 2: 6.6.7> ..."
   exit 1
 fi
 
