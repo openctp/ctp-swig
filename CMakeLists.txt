@@ -22,15 +22,14 @@ elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
         ${PROJECT_SOURCE_DIR}/lin64
         /root/.pyenv/versions/3.12.0/include/python3.12/
         )
-    link_directories(${PROJECT_SOURCE_DIR}
-        /root/.pyenv/versions/3.12.0/lib/
-        )
+    link_directories(${PROJECT_SOURCE_DIR})
 endif()
 
 set(trader _thosttraderapi)
 set(mduser _thostmduserapi)
 
 add_library(${trader} SHARED thosttraderapi_wrap.cxx)
+
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     set_target_properties(${trader} PROPERTIES POSITION_INDEPENDENT_CODE ON)
     set_target_properties(${trader} PROPERTIES LINK_FLAGS "-Wl,-enable-new-dtags")
@@ -41,12 +40,13 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     add_library(LIB_TD SHARED IMPORTED)
     set_property(TARGET LIB_TD PROPERTY IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/lin64/thosttraderapi_se.so)
     set_target_properties(${trader} PROPERTIES PREFIX "")
-    target_link_libraries(${trader} PUBLIC pthread LIB_TD python3.12)
+    target_link_libraries(${trader} PUBLIC pthread LIB_TD)
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     target_link_libraries(${trader} PUBLIC thosttraderapi_se python${PY_LIB})
 endif()
 
 add_library(${mduser} SHARED thostmduserapi_wrap.cxx)
+
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     set_target_properties(${mduser} PROPERTIES POSITION_INDEPENDENT_CODE ON)
     set_target_properties(${mduser} PROPERTIES LINK_FLAGS "-Wl,-enable-new-dtags")
@@ -57,7 +57,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     add_library(LIB_MD SHARED IMPORTED)
     set_property(TARGET LIB_MD PROPERTY IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/lin64/thostmduserapi_se.so)
     set_target_properties(${mduser} PROPERTIES PREFIX "")
-    target_link_libraries(${mduser} PUBLIC pthread LIB_MD python3.12)
+    target_link_libraries(${mduser} PUBLIC pthread LIB_MD)
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     target_link_libraries(${mduser} PUBLIC thostmduserapi_se python${PY_LIB})
 endif()
